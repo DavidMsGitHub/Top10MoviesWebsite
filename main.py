@@ -46,7 +46,7 @@ def home():
         # This line gives each movie a new ranking reversed from their order in all_movies
         all_movies[i].ranking = len(all_movies) - i
     db.session.commit()
-    return jsonify(render_template("index.html", movies=all_movies))
+    return render_template("index.html", movies=all_movies)
 
 @app.route("/edit/<int:movie_id>", methods=["GET", "POST"])
 def edit(movie_id):
