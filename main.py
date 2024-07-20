@@ -5,6 +5,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import requests
+from flask import jsonify
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
@@ -45,7 +46,7 @@ def home():
         # This line gives each movie a new ranking reversed from their order in all_movies
         all_movies[i].ranking = len(all_movies) - i
     db.session.commit()
-    return render_template("index.html", movies=all_movies)
+    return jsonify(render_template("index.html", movies=all_movies))
 
 @app.route("/edit/<int:movie_id>", methods=["GET", "POST"])
 def edit(movie_id):
